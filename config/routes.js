@@ -12,17 +12,30 @@ require("fs").readdirSync(__dirname + '/../app/controllers').forEach(function(fi
 module.exports = function (app) {
 
   app.get('/', function (req, res) {
-    res.redirect('/users');
+    res.render('index',
+      { title : 'Index' }
+    );
   });
 
   // user resource
-  app.get('/users', controller.users.list);
-  app.get('/users/new', controller.users.newResource);
+  getAuthenticated(app, '/users', controller.users.list);
+  getAuthenticated(app, '/users/new', controller.users.newResource);
   app.post('/users/create', controller.users.create);
-  app.get('/user/:id', controller.users.get);
-  app.get('/user/:id/edit', controller.users.edit);
+  getAuthenticated(app, '/user/:id', controller.users.get);
+  getAuthenticated(app, '/user/:id/edit', controller.users.edit);
   app.put('/user/:id', controller.users.update);
   app.delete('/user/:id', controller.users.remove);
 
+  // login
+  app.get('/login', controller.users.loginForm);
 
 };
+
+function getAuthenticated(app, path, method) {
+  return app.get(path, ensureAuthenticated, method);
+}
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login')
+}

@@ -91,6 +91,11 @@ var remove = function (req, res) {
   });
 };
 
+var loginForm = function (req, res) {
+  res.render('users/login',
+    { title: 'Login User', user: req.session.tempUser, message: req.session.messages });
+};
+
 module.exports = {
   list: list,
   get: get,
@@ -98,5 +103,6 @@ module.exports = {
   create: create,
   edit: edit,
   update: update,
-  remove: remove
+  remove: remove,
+  loginForm: loginForm
 };

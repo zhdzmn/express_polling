@@ -10,7 +10,8 @@
     "mongoose": "*",
     "passport": "*",
     "passport-local": "*",
-    "connect-flash": "*"
+    "connect-flash": "*",
+    "string": "*"
   },
   "scripts": {
     "start": "nodemon app.js"

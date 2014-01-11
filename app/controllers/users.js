@@ -42,16 +42,10 @@ var get = function (req, res) {
 };
 
 var profile = function (req, res) {
-  User.findById(req.user._id, function (error, user) {
-    if (error) {
-      res.redirect('/users');
-    } else {
-      res.render('users/profile',
-        { title: 'User',
-          currentUser: req.user
-        });
-    }
-  });
+  res.render('users/profile',
+    { title: 'User',
+      currentUser: req.user
+    });
 };
 
 var newResource = function (req, res) {

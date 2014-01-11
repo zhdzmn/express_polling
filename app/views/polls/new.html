@@ -1,0 +1,15 @@
+<form action="/polls" method="post">
+  <div>
+    <div>
+      Choose a predictive winner of FIFA World Cup 2014:
+    </div>
+    <% ['Brazil', 'Argentina', 'Spain', 'Italy', 'Germany'].sort().forEach(function(team){ %>
+    <input type="radio" name="choice" value="<%= team.toLowerCase() %>"><%= team %><br>
+    <% }); %>
+  </div>
+  <button>Save</button>
+</form>
+
+<a href="/users">
+  <button>Users</button>
+</a>

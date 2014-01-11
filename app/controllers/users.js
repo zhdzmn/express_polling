@@ -14,12 +14,14 @@ var list = function (req, res) {
     if (error) {
       res.render('index',
         { title : 'Index',
+          currentUser: req.user,
           errors: error
         }
       );
     }
     res.render('users/index',
       { users : users,
+        currentUser: req.user,
         title : 'User List' }
     );
   });
@@ -32,7 +34,21 @@ var get = function (req, res) {
     } else {
       res.render('users/show',
         { title: 'User',
+          currentUser: req.user,
           user : user
+        });
+    }
+  });
+};
+
+var profile = function (req, res) {
+  User.findById(req.user._id, function (error, user) {
+    if (error) {
+      res.redirect('/users');
+    } else {
+      res.render('users/profile',
+        { title: 'User',
+          currentUser: req.user
         });
     }
   });
@@ -40,7 +56,10 @@ var get = function (req, res) {
 
 var newResource = function (req, res) {
   res.render('users/new',
-    { title: 'User List' }
+    { title: 'User List',
+      currentUser: req.user,
+      user: new User()
+    }
   );
 };
 
@@ -48,14 +67,19 @@ var create = function (req, res) {
   var user = new User(req.body);
   user.save(function (err, user) {
     if (err) {
-      res.redirect('/users/new');
+      res.render('users/new',
+        { title: 'Create user',
+          currentUser: req.user,
+          user : req.body,
+          errors: err
+        });
     } else {
       res.render('users/show',
         { title: 'User',
+          currentUser: req.user,
           user : user
         });
     }
-
   });
 };
 
@@ -66,6 +90,7 @@ var edit = function (req, res) {
     } else {
       res.render('users/edit',
         { title: 'Edit user',
+          currentUser: req.user,
           user : user
         });
     }
@@ -79,6 +104,7 @@ var update = function (req, res) {
     } else {
       res.render('users/show',
         { title: 'User',
+          currentUser: req.user,
           user : user
         });
     }
@@ -93,7 +119,7 @@ var remove = function (req, res) {
 
 var loginForm = function (req, res) {
   res.render('users/login',
-    { title: 'Login User', user: req.session.tempUser, message: req.session.messages });
+    { title: 'Login User', user: req.session.tempUser, currentUser: req.user, message: req.session.messages });
 };
 
 module.exports = {
@@ -104,5 +130,6 @@ module.exports = {
   edit: edit,
   update: update,
   remove: remove,
+  profile: profile,
   loginForm: loginForm
 };

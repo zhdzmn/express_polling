@@ -3,10 +3,38 @@
 <head>
   <meta charset="utf-8" />
   <title><%= title || 'Empty Title' %></title>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+
+    });
+  </script>
 </head>
 <body>
 
 <%- body %>
+
+<% if (currentUser) { %>
+
+<div>
+  <a href="/polls/new">
+    <button>Vote!</button>
+  </a>
+</div>
+
+<div>
+  <a href="/user/profile">
+    <button>My Profile</button>
+  </a>
+</div>
+<div>
+  <a href="/logout">
+    <button>Log out</button>
+  </a>
+</div>
+
+<% } %>
 
 </body>
 </html>

@@ -1,33 +1,34 @@
-<form action="/users/create" method="post">
+<%= error %>
+<form action="/users" method="post">
   <div>
     <label for="firstName">
       First Name:
     </label>
-    <input id="firstName" type="text" name="firstName"/>
+    <input id="firstName" type="text" name="firstName" value="<%= user.firstName %>"/>
   </div>
   <div>
     <label for="lastName">
       Last Name:
     </label>
-    <input id="lastName" type="text" name="lastName"/>
+    <input id="lastName" type="text" name="lastName" value="<%= user.lastName %>"/>
   </div>
   <div>
     <label for="email">
       Email:
     </label>
-    <input id="email" type="email" name="email"/>
+    <input id="email" type="email" name="email" value="<%= user.email %>"/>
   </div>
   <div>
     <label for="password">
       Password:
     </label>
-    <input id="password" type="password" name="password"/>
+    <input id="password" type="password" name="password" value="<%= user.password %>"/>
   </div>
   <div>
     <label for="organization">
       Organization:
     </label>
-    <input id="organization" type="text" name="organization"/>
+    <input id="organization" type="text" name="organization" value="<%= user.organization %>"/>
   </div>
   <button>Save</button>
 </form>

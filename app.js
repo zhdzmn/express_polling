@@ -107,7 +107,7 @@ app.post('/login', function(req, res, next) {
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.redirect('/users');
+      return res.redirect('/user/profile');
     });
   })(req, res, next);
 });

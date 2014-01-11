@@ -1,0 +1,18 @@
+<h1>List of users</h1>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Time</th>
+    <th>Choice</th>
+  </tr>
+  <% polls.forEach(function (poll) { %>
+  <tr>
+    <td><%= poll.user.firstName %> <%= poll.user.lastName %></td>
+    <td><%= poll.time %></td>
+    <td><%= poll.choice %></td>
+  </tr>
+  <% }); %>
+</table>
+<a href="/polls/new">
+  <button>New poll</button>
+</a>

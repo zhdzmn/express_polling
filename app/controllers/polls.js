@@ -1,45 +1,44 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-  Poll = mongoose.model('Poll');
+  Poll = mongoose.model('Poll'),
+  moment = require('moment'),
+  _ = require('lodash');
 
 var list = function (req, res) {
-  Poll.find(req.query).populate('user').exec(function (error, polls) {
-    if (error) {
-      res.render('index',
+  Poll.find(req.query).populate('user').sort('time').exec(function (listError, polls) {
+    if (listError) {
+      return res.render('index',
         { title : 'Index',
           currentUser: req.user,
-          errors: error
+          errors: listError
         }
       );
-      return;
     }
-    res.render('polls/index',
-      { polls : polls,
-        currentUser: req.user,
-        title : 'Poll List' }
-    );
-  });
-};
 
-var chart = function (req, res) {
-  Poll.aggregate([{ $group: { _id : '$choice', count: { $sum: 1 } }}],
-    function (error, polls) {
-      if (error) {
-        res.render('index',
-          { title : 'Index',
-            currentUser: req.user,
-            errors: error
-          }
-        );
-        return;
-      }
-      res.render('polls/chart',
-        { polls : polls,
-          currentUser: req.user,
-          title : 'Poll List' }
-      );
+    polls = _.map(polls, function (poll) {
+      poll.formattedTime = moment(poll.time).format("D MMM YYYY, h:mm:ss a");
+      return poll;
     });
+
+    Poll.aggregate([{ $group: { _id : '$choice', count: { $sum: 1 } }}],
+      function (aggError, pollChartData) {
+        if (aggError) {
+          return res.render('index',
+            { title : 'Index',
+              currentUser: req.user,
+              errors: aggError
+            }
+          );
+        }
+        return res.render('polls/index',
+          { polls : polls,
+            pollChartData: pollChartData,
+            currentUser: req.user,
+            title : 'Poll List' }
+        );
+      });
+  });
 };
 
 var newResource = function (req, res) {
@@ -72,7 +71,6 @@ var create = function (req, res) {
 
 module.exports = {
   list: list,
-  chart: chart,
   newResource: newResource,
   create: create
 };

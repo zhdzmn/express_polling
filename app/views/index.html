@@ -1,10 +1,14 @@
-<h1>Example App: Home</h1>
-<h3 class="demo-panel-title">Please login</h3>
+<h2>Example App: Home</h2>
 
 <% if (!currentUser) { %>
-<div>
-  <a href="/login">
-    <button>Login</button>
-  </a>
+<h3 class="demo-panel-title">Please login</h3>
+<div class="row demo-row btn-bottom">
+  <div class="col-xs-2"><a href="/login" class="btn btn-block btn-lg btn-info">Login</a></div>
 </div>
+<h3 class="demo-panel-title">OR sign up !</h3>
+<div class="row demo-row btn-bottom">
+  <div class="col-xs-2"><a href="/users/new" class="btn btn-block btn-lg btn-success">Sign Up</a></div>
+</div>
+<% } else { %>
+<h3 class="demo-panel-title">Choose an action from below !!</h3>
 <% } %>

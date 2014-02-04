@@ -19,8 +19,21 @@
 .tbl-custom {
     width: 100%;
 }
+.poll-table.tbl-custom {
+    max-width: 620px;
+}
 .tbl-custom th {
     border-bottom: 1px solid #cdcdcd;
+}
+.poll-table th:first-child,
+.poll-table td:first-child
+{
+    padding-right: 15px;
+}
+.poll-table th:last-child,
+.poll-table td:last-child
+{
+    padding-left: 15px;
 }
 .tbl-custom td {
     border-bottom: 1px solid #efefef;
@@ -70,4 +83,7 @@
 }
 .adjust-margin-left {
     margin-left: 90px;
+}
+.capitalize-font {
+    text-transform: capitalize
 }

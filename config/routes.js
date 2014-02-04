@@ -19,9 +19,10 @@ module.exports = function (app) {
   });
 
   // user resource
-  getAuthenticated(app, '/users/new', controller.users.newResource);
+  app.get('/users/new', controller.users.newResource);
+  app.post('/users', controller.users.create);
+
   getAuthenticated(app, '/users', controller.users.list);
-  postAuthenticated(app, '/users', controller.users.create);
 
   getAuthenticated(app, '/user/profile', controller.users.profile);
   getAuthenticated(app, '/user/:id/edit', controller.users.edit);
@@ -31,7 +32,6 @@ module.exports = function (app) {
 
   // poll resource
   getAuthenticated(app, '/polls', controller.polls.list);
-  getAuthenticated(app, '/polls/chart', controller.polls.chart);
   getAuthenticated(app, '/polls/new', controller.polls.newResource);
   postAuthenticated(app, '/polls', controller.polls.create);
 

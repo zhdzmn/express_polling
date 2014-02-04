@@ -52,7 +52,8 @@ var newResource = function (req, res) {
   res.render('users/new',
     { title: 'User List',
       currentUser: req.user,
-      user: new User()
+      user: new User(),
+      errors: null
     }
   );
 };

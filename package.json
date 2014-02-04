@@ -12,7 +12,9 @@
     "passport-local": "*",
     "connect-flash": "*",
     "string": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "lodash": "*",
+    "moment": "*"
   },
   "scripts": {
     "start": "nodemon app.js"

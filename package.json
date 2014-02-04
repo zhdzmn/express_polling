@@ -11,7 +11,8 @@
     "passport": "*",
     "passport-local": "*",
     "connect-flash": "*",
-    "string": "*"
+    "string": "*",
+    "socket.io": "*"
   },
   "scripts": {
     "start": "nodemon app.js"

@@ -1,0 +1,73 @@
+.header {
+    padding: 15px 25px 25px 25px;
+    background-color: #343434;
+    color: #ededed;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.header .float-right {
+    float: right;
+    padding-top: 8px;
+}
+.clear {
+    clear: both;
+}
+.tbl-custom {
+    width: 100%;
+}
+.tbl-custom th {
+    border-bottom: 1px solid #cdcdcd;
+}
+.tbl-custom td {
+    border-bottom: 1px solid #efefef;
+}
+.icon-green {
+    color: #e74c3c;
+}
+.icon-red {
+    color: #1abc9c;
+}
+.profile span, .profile label {
+    width: 150px;
+    font-weight: bold;
+    display: block;
+    float: left;
+}
+.profile label {
+    margin-bottom: 10px;
+}
+.btn-bottom {
+    margin-top: 20px;
+}
+.row.margin-left-0 {
+    margin-left: 0;
+}
+.btn button {
+    align-items: flex-start;
+    text-align: center;
+    cursor: pointer;
+    color: #FFFFFF;
+    padding: 0;
+    border: none;
+    border-image-source: none;
+    background-color: transparent;
+}
+.btn-default-settings button {
+    align-items: flex-start;
+    text-align: center;
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    border-image-source: none;
+    background-color: transparent;
+}
+.width-300 {
+    width: 300px;
+}
+.adjust-margin-left {
+    margin-left: 90px;
+}

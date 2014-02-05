@@ -1,15 +1,16 @@
 <form action="/polls" method="post">
 
-    <div class="row margin-left-0">
-        <h3 class="demo-panel-title">
-            Choose a predictive winner of FIFA World Cup 2014:
-        </h3>
-        <% ['Brazil', 'Argentina', 'Spain', 'Italy', 'Germany'].sort().forEach(function(team){ %>
-        <label class="radio">
-            <input type="radio" name="choice"  data-toggle="radio" value="<%= team.toLowerCase() %>"><%= team %></label>
-        <% }); %>
-    </div>
-    <div class="row demo-row">
-        <div class="col-xs-2"><a href="/polls/new" class="btn btn-block btn-lg btn-success"><button>Save</button></a></div>
-    </div>
+  <div class="row margin-left-0">
+    <h3 class="demo-panel-title">
+      Choose a predictive winner of FIFA World Cup 2014:
+    </h3>
+    <% ['Brazil', 'Argentina', 'Spain', 'Italy', 'Germany'].sort().forEach(function(team){ %>
+    <label class="radio">
+      <input type="radio" name="choice"  data-toggle="radio" value="<%= team.toLowerCase() %>"><%= team %>
+    </label>
+    <% }); %>
+  </div>
+  <div class="row demo-row">
+    <div class="col-xs-2"><button class="btn btn-block btn-lg btn-success">Save</button></div>
+  </div>
 </form>

@@ -1,26 +1,26 @@
 <h3 class="demo-panel-title">Polling summery</h3>
 <div class="chart float-left"></div>
 <table class="tbl-custom poll-table float-right">
-    <tr>
-        <th>User</th>
-        <th>Time</th>
-        <th>Choice</th>
-    </tr>
-    <% polls.forEach(function (poll) { %>
-    <tr>
-        <td><%= poll.user.firstName %> <%= poll.user.lastName %></td>
-        <td><%= poll.formattedTime || poll.time %></td>
-        <td class="capitalize-font"><%= poll.choice %></td>
-    </tr>
-    <% }); %>
+  <tr>
+    <th>User</th>
+    <th>Time</th>
+    <th>Choice</th>
+  </tr>
+  <% polls.forEach(function (poll) { %>
+  <tr>
+    <td><%= poll.user.firstName %> <%= poll.user.lastName %></td>
+    <td><%= poll.formattedTime || poll.time %></td>
+    <td class="capitalize-font"><%= poll.choice %></td>
+  </tr>
+  <% }); %>
 </table>
 <div style="clear: both"></div>
 
 <script>
 
   var width = 300,
-      height = 300,
-      radius = Math.min(width, height) / 2;
+          height = 300,
+          radius = Math.min(width, height) / 2;
 
   var color = d3.scale.ordinal()
           .domain(['brazil', 'argentina', 'spain', 'italy', 'germany'])
@@ -34,12 +34,6 @@
           .sort(null)
           .value(function(d) { return d.count; });
 
-  var svg = d3.select("div.chart").append("svg")
-          .attr("width", width)
-          .attr("height", height)
-          .append("g")
-          .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
   var data = '<%= JSON.stringify(pollChartData) || "{}" %>';
 
   data = JSON.parse(data.replace(/&quot;/g, "\""));
@@ -48,21 +42,48 @@
     d.count = +d.count;
   });
 
-  var g = svg.selectAll(".arc")
-          .data(pie(data))
-          .enter().append("g")
-          .attr("class", "arc");
+  _drawPie();
 
-  g.append("path")
-          .attr("d", arc)
-          .style("fill", function(d) { return color(d.data._id); });
+  function _drawPie () {
+    $('svg').remove();
+    var svg = d3.select("div.chart").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  g.append("text")
-          .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-          .attr("dy", ".35em")
-          .style("text-anchor", "middle")
-          .attr("class", "capitalize-font")
-          .text(function(d) { return d.data._id; });
+    var g = svg.selectAll(".arc")
+            .data(pie(data))
+            .enter().append("g")
+            .attr("class", "arc");
 
+    g.append("path")
+            .attr("d", arc)
+            .style("fill", function(d) { return color(d.data._id); });
+
+    g.append("text")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr("dy", ".35em")
+            .style("text-anchor", "middle")
+            .attr("class", "capitalize-font")
+            .text(function(d) { return d.data._id; });
+  }
+
+
+
+  var socket = io.connect('http://localhost:3000');
+  socket.on('poll:new', function (poll) {
+    var name = poll.user.firstName + ' ' + poll.user.lastName;
+    var pollRow = $('<tr></tr>');
+    pollRow.append('<td>' + name + '</td>');
+    pollRow.append('<td>' + moment(poll.time).format("D MMM YYYY, h:mm:ss a") + '</td>');
+    pollRow.append('<td class="capitalize-font">' + poll.choice + '</td>');
+    $('.poll-table').append(pollRow);
+    data.forEach(function(d) {
+      if (d._id === poll.choice) { d.count += 1; }
+    });
+    _drawPie();
+    $.jGrowl(name + ' voted for ' + poll.choice.toUpperCase());
+  });
 
 </script>

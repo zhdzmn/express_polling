@@ -5,6 +5,10 @@ var mongoose = require('mongoose'),
   moment = require('moment'),
   _ = require('lodash');
 
+var socketIo;
+
+var useSocket = function (io) { socketIo = io.sockets; };
+
 var list = function (req, res) {
   Poll.find(req.query).populate('user').sort('time').exec(function (listError, polls) {
     if (listError) {
@@ -64,7 +68,10 @@ var create = function (req, res) {
         }
       );
     } else {
-      res.redirect('/polls');
+      Poll.populate(poll, {path: 'user'}, function (err, poll) {
+        socketIo.emit('poll:new', poll);
+        res.redirect('/polls');
+      });
     }
   });
 };
@@ -72,5 +79,6 @@ var create = function (req, res) {
 module.exports = {
   list: list,
   newResource: newResource,
-  create: create
+  create: create,
+  useSocket: useSocket
 };

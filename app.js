@@ -8,6 +8,7 @@ var express = require('express')
   , database = require('./config/database')[env]
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
+  , socketIo = require('socket.io')
   , app = express();
 
 mongoose.connect(database.connectionUrl);
@@ -49,16 +50,10 @@ app.configure(function () {
 // all the routes are declered here
 require('./config/routes')(app);
 
-
 // passport settings
 
 var User = mongoose.model('User');
 
-// Passport session setup.
-//   To support persistent login sessions, Passport needs to be able to
-//   serialize users into and deserialize users out of the session.  Typically,
-//   this will be as simple as storing the user ID when serializing, and finding
-//   the user by ID when deserializing.
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
@@ -70,10 +65,10 @@ passport.deserializeUser(function(id, done) {
 });
 
 // Use the LocalStrategy within Passport.
-//   Strategies in passport require a `verify` function, which accept
-//   credentials (in this case, a username and password), and invoke a callback
-//   with a user object.  In the real world, this would query a database;
-//   however, in this example we are using a baked-in set of users.
+// Strategies in passport require a `verify` function, which accept
+// credentials (in this case, a username and password), and invoke a callback
+// with a user object.  In the real world, this would query a database;
+// however, in this example we are using a baked-in set of users.
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -112,19 +107,16 @@ app.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-//
-//app.post('/login',
-//  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-//  function(req, res) {
-//    res.redirect('/users');
-//  });
-
 app.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+var server = http.createServer(app).listen(app.get('port'),  _initServer);
 
+function _initServer() {
+  console.log('Express server listening on port ' + app.get('port'));
+  var io = socketIo.listen(server);
+  require('./app/controllers/polls').useSocket(io);
+
+}

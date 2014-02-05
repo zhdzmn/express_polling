@@ -1,41 +1,41 @@
 <div class="profile">
-    <h3 class="demo-panel-title">Edit profile</h3>
-<form action="/user/<%= user._id %>" method="POST">
-  <input type="hidden" name="_method" value="put"/>
-  <div class="clearfix">
-    <label for="firstName">
-      First Name:
-    </label>
-    <input id="firstName" class="form-control width-300" type="text" name="firstName" value="<%= user.firstName %>"/>
-  </div>
-  <div class="clearfix">
-    <label for="lastName">
-      Last Name:
-    </label>
-    <input id="lastName" class="form-control width-300" type="text" name="lastName" value="<%= user.lastName %>"/>
-  </div>
-  <div class="clearfix">
-    <label for="email">
-      Email:
-    </label>
-    <input id="email" class="form-control width-300" type="email" name="email" value="<%= user.email %>"/>
-  </div>
-  <div class="clearfix">
-    <label for="password">
-      Password:
-    </label>
-    <input id="password" class="form-control width-300" type="password" name="password" value="<%= user.password %>"/>
-  </div>
-  <div class="clearfix">
-    <label for="organization">
-      Organization:
-    </label>
-    <input id="organization" class="form-control width-300" type="text" name="organization" value="<%= user.organization %>"/>
-  </div>
-  <div class="row demo-row btn-bottom">
-    <div class="col-xs-2">
-      <button class="btn btn-block btn-lg btn-success"> Save </button>
+  <h3 class="demo-panel-title">Edit profile</h3>
+  <form action="/user/<%= user._id %>" method="POST">
+    <input type="hidden" name="_method" value="put"/>
+    <div class="clearfix">
+      <label for="firstName">
+        First Name:
+      </label>
+      <input id="firstName" class="form-control width-300" type="text" name="firstName" value="<%= user.firstName %>"/>
     </div>
-  </div>
-</form>
+    <div class="clearfix">
+      <label for="lastName">
+        Last Name:
+      </label>
+      <input id="lastName" class="form-control width-300" type="text" name="lastName" value="<%= user.lastName %>"/>
+    </div>
+    <div class="clearfix">
+      <label for="email">
+        Email:
+      </label>
+      <input id="email" class="form-control width-300" type="email" name="email" value="<%= user.email %>"/>
+    </div>
+    <div class="clearfix">
+      <label for="password">
+        Password:
+      </label>
+      <input id="password" class="form-control width-300" type="password" name="password" value="<%= user.password %>"/>
+    </div>
+    <div class="clearfix">
+      <label for="organization">
+        Organization:
+      </label>
+      <input id="organization" class="form-control width-300" type="text" name="organization" value="<%= user.organization %>"/>
+    </div>
+    <div class="row demo-row btn-bottom">
+      <div class="col-xs-2">
+        <button class="btn btn-block btn-lg btn-success"> Save </button>
+      </div>
+    </div>
+  </form>
 </div>

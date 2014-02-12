@@ -12,7 +12,7 @@ var list = function (req, res) {
       }
     });
     if (error) {
-      res.render('index',
+      return res.render('index',
         { title : 'Index',
           currentUser: req.user,
           errors: error

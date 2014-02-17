@@ -1,5 +1,5 @@
 .header {
-    padding: 15px 25px 25px 25px;
+    padding: 0 25px 0 25px;
     background-color: #343434;
     color: #ededed;
 }
@@ -9,9 +9,12 @@
 .float-right {
     float: right;
 }
+.logo {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
 .header .float-right {
     float: right;
-    padding-top: 8px;
 }
 .clear {
     clear: both;
@@ -87,12 +90,32 @@
 .capitalize-font {
     text-transform: capitalize
 }
+.width-10-per {
+    width: 10%;
+}
 .width-20-per {
     width: 20%;
 }
 .width-77-per {
     width: 77%;
 }
+.width-87-per {
+    width: 87%;
+}
 .width-67-per {
     width: 67%;
+}
+.nav li {
+    display: inline-block;
+}
+.nav > li > a {
+    padding: 20px 20px;
+    color: #ababab;
+}
+.nav > li > a:hover {
+    color: #232323;
+    background-color: #efefef;
+}
+.project-title {
+    padding-top: 20px;
 }

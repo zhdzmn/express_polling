@@ -21,19 +21,21 @@
 </head>
 <body>
 <div class="header">
-  <div class="float-left width-20-per"><img src="/img/nc-logo.png" border="0" /></div>
-  <div class="float-right width-77-per">
-    <div class="row width-67-per float-left">
-      <div class="col-xs-2"><a href="/" class="btn btn-block btn-lg btn-info">Home</a></div>
-      <% if (currentUser) { %>
-      <div class="col-xs-2"><a href="/polls/new" class="btn btn-block btn-lg btn-primary">Vote!</a></div>
-      <div class="col-xs-2"><a href="/users" class="btn btn-block btn-lg btn-info">Users</a></div>
-      <div class="col-xs-2"><a href="/polls" class="btn btn-block btn-lg btn-info">Poll list</a></div>
-      <div class="col-xs-2"><a href="/user/profile" class="btn btn-block btn-lg btn-info">My Profile</a></div>
-      <div class="col-xs-2"><a href="/logout" class="btn btn-block btn-lg btn-danger">Log out</a></div>
-      <% } %>
+  <div class="float-left width-10-per logo"><img src="/img/nc-logo.png" border="0" /></div>
+  <div class="float-right width-87-per">
+    <div class="row width-87-per float-left">
+    <ul class="nav">
+        <li><a href="/" class="">Home</a></li>
+        <% if (currentUser) { %>
+        <li><a href="/polls/new" class="">Vote!</a></li>
+        <li><a href="/users" class="">Users</a></li>
+        <li><a href="/polls" class="">Poll list</a></li>
+        <li><a href="/user/profile" class="">My Profile</a></li>
+        <li><a href="/logout" class="">Log out</a></li>
+        <% } %>
+    </ul>
     </div>
-    <div class="float-right">WorkShop</div>
+    <div class="float-right project-title">WorkShop</div>
     <div class="clear"></div>
   </div>
   <div class="clear"></div>
